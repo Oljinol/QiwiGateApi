@@ -1,6 +1,12 @@
 {
     "name": "qiwi-gate/qg-api",
     "description": "Класс для работы с API QiwiGate",
+    "keywords": [
+        "qiwigate", "api", "qiwi"
+    ],
+    "homepage": "https://github.com/Oljinol/QiwiGateApi",
+    "version": "0.1.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "TillKuk",
@@ -8,10 +14,12 @@
         }
     ],
     "minimum-stability": "dev",
+    "require": {
+        "php" : ">=7.0.0"
+    },
     "autoload": {
         "psr-4": {
-            "src\\": "QiwiGate"
+            "QGA\\": "src"
         }
-    },
-    "require": {}
+    }
 }

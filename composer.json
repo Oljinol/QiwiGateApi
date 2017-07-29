@@ -6,7 +6,7 @@
         "qiwigate", "api", "qiwi"
     ],
     "homepage": "https://github.com/Oljinol/QiwiGateApi",
-    "version": "1.0.0",
+    "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
         {

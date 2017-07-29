@@ -1,6 +1,7 @@
 {
     "name": "qiwi-gate/qg-api",
     "description": "Класс для работы с API QiwiGate",
+    "type": "library",
     "keywords": [
         "qiwigate", "api", "qiwi"
     ],
@@ -20,6 +21,11 @@
     "autoload": {
         "psr-4": {
             "QGA\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.0-dev"
         }
     }
 }

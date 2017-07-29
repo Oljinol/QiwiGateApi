@@ -1,5 +1,7 @@
 <?php
 
+namespace QGA;
+
 class QiwiGate
 {
     private $qiwiKey;

@@ -35,10 +35,10 @@ class QiwiGate
 
     private function setProperties($method, $options, $assoc)
     {
-        $this->method  = $method
-             ->options = $options
-             ->type    = explode('.', $method)[0]
-             ->assoc   = $assoc;
+        $this->method  = $method;
+        $this->options = $options;
+        $this->type    = explode('.', $method)[0];
+        $this->assoc   = $assoc;
     }
 
     private function initializeQuery()

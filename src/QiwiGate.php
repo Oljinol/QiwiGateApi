@@ -8,12 +8,12 @@ class QiwiGate
     public $error = false;
     public $response;
     public $history;
+    public $link;
 
     private $method;
     private $options;
     private $assoc;
     private $type;
-    private $link;
     private $result;
 
     public function __construct($purseAPIKey, $accountAPIKey)
@@ -34,17 +34,15 @@ class QiwiGate
     private function setProperties($method, $options, $assoc)
     {
         $this->method  = $method
-            ->options = $options
-            ->type    = explode('.', $method)[0]
-            ->assoc   = $assoc;
+             ->options = $options
+             ->type    = explode('.', $method)[0]
+             ->assoc   = $assoc;
     }
 
     private function initializeQuery()
     {
-        $this->link = $this->getLink();
-
-        $this->result = file_get_contents($this->link);
-
+        $this->link     = $this->getLink();
+        $this->result   = file_get_contents($this->link);
         $this->response = json_decode($this->result, $this->assoc);
     }
 

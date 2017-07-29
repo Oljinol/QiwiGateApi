@@ -14,7 +14,6 @@
             "email": "jilbiljeka@yandex.ru"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php" : "^5.4"
     },

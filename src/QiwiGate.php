@@ -25,10 +25,27 @@ class QiwiGate
     public function sendRequest($method, $options = [], $assoc = true)
     {
         $this->setProperties($method, $options, $assoc);
-        $this->initializeTheQuery();
+        $this->initializeQuery();
         $this->checkResult();
 
         return $this;
+    }
+
+    private function setProperties($method, $options, $assoc)
+    {
+        $this->method  = $method
+            ->options = $options
+            ->type    = explode('.', $method)[0]
+            ->assoc   = $assoc;
+    }
+
+    private function initializeQuery()
+    {
+        $this->link = $this->getLink();
+
+        $this->result = file_get_contents($this->link);
+
+        $this->response = json_decode($this->result, $this->assoc);
     }
 
     private function checkResult()
@@ -38,23 +55,6 @@ class QiwiGate
         if ($result->status === 'error') {
             $this->error = true;
         }
-    }
-
-    private function initializeTheQuery()
-    {
-        $this->link = $this->getLink();
-
-        $this->result = file_get_contents($this->link);
-
-        $this->response = json_decode($this->result, $this->assoc);
-    }
-
-    private function setProperties($method, $options, $assoc)
-    {
-        $this->method  = $method
-             ->options = $options
-             ->type    = explode('.', $method)[0]
-             ->assoc   = $assoc;
     }
 
     private function getLink()

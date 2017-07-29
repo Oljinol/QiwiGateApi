@@ -1,0 +1,12 @@
+{
+    "name": "qiwi-gate/qg-api",
+    "description": "Класс для работы с API QiwiGate",
+    "authors": [
+        {
+            "name": "TillKuk",
+            "email": "jilbiljeka@yandex.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

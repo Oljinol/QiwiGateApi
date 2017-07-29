@@ -21,10 +21,10 @@
         "psr-4": {
             "QGA\\": "src"
         }
-    },
+    }/*,
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.0"
         }
-    }
+    }*/
 }

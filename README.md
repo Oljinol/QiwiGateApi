@@ -92,11 +92,11 @@ $options = [
 ];
 $method  = 'qiwi.get.history';
 
-$qiwi->sendRequest($method, $options);
+$qiwi->sendRequest($method, $options, false);
 
 if (!$qiwi->error){
 
-    foreach ($qiwi->response as $payment) {
+    foreach ($qiwi->response->history as $payment) {
         if ($payment['comment'] === $myComment) {
             $db->writeToTheDatabase($payment);
         }

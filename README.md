@@ -53,7 +53,6 @@ $qiwi->response
      ->password  = xxx
      ->expire    = dd.mm.yyyy
      ->pay       = 1
-];
 
 // Ссылка которая была сформирована и по которой был отправлен запрос 
 $qiwi->link = 'https://qiwigate.ru/api?key=API токен кошелька&method=account.info.wallet?phone_key=API токен кошелька';

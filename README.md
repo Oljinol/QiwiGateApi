@@ -77,7 +77,7 @@ $method  = 'qiwi.get.history';
 
 $qiwi->sendRequest($method, $options);
 
-if ($qiwi->error){
+if (!$qiwi->error){
 
     foreach ($qiwi->response as $payment) {
         if ($payment['comment'] === $myComment) {

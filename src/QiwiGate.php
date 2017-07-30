@@ -18,12 +18,35 @@ class QiwiGate
     private $type;
     private $result;
 
+    /**
+     * QiwiGate constructor.
+     * @param $purseAPIKey, API ключ кошелька
+     * @param $accountAPIKey, API ключ аккаунта
+     */
     public function __construct($purseAPIKey, $accountAPIKey)
     {
         $this->qiwiKey    = $purseAPIKey;
         $this->accountKey = $accountAPIKey;
     }
 
+    /**
+     * Установить API ключ кошелька
+     *
+     * @param $value, API ключ кошелька
+     */
+    public function setPurseAPIKey($value)
+    {
+        $this->qiwiKey = $value;
+    }
+
+    /**
+     * Отправить запрос
+     *
+     * @param $method, имя метода
+     * @param array $options, параметры запроса
+     * @param bool $assoc, ассециативный массив или объект
+     * @return $this
+     */
     public function sendRequest($method, $options = [], $assoc = true)
     {
         $this->setProperties($method, $options, $assoc);

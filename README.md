@@ -78,7 +78,13 @@ $method  = 'qiwi.get.history';
 $qiwi->sendRequest($method, $options);
 
 if ($qiwi->error){
-    $db->writeToTheDatabase($qiwi->response);
+
+    foreach ($qiwi->response as $payment) {
+        if ($payment['comment'] === $myComment) {
+            $db->writeToTheDatabase($payment);
+        }
+    }
+    
 } else {
     // Произошла ошибка
 }

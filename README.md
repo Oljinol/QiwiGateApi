@@ -21,7 +21,7 @@ $qiwi = new QGA\QiwiGate($purseAPIKey, $accountAPIKey);
 
 * Отправка запроса:
 ```php
-$qiwi->sendRequest($method, $options = [], $assoc = false);
+$qiwi->sendRequest($method, $options = [], $assoc = true);
 
 /*
  * Обязательный аргумент
@@ -47,12 +47,12 @@ $assoc = false;
 $qiwi->error = true || false;
 
 // Ответ с сервера в виде ассициативного массива или объекта
-$qiwi->response = [
-    'status'   => 'success',
-    'phone'    => '79000000000',
-    'password' => 'xxx',
-    'expire'   => 'dd.mm.yyyy',
-    'pay'      => '1'
+$qiwi->response
+     ->status    = success
+     ->phone     = 79000000000
+     ->password  = xxx
+     ->expire    = dd.mm.yyyy
+     ->pay       = 1
 ];
 
 // Ссылка которая была сформирована и по которой был отправлен запрос 

@@ -44,7 +44,7 @@ class QiwiGate
      *
      * @param $method, имя метода
      * @param array $options, параметры запроса
-     * @param bool $assoc, ассециативный массив или объект
+     * @param bool $assoc, ассоциативный массив или объект
      * @return $this
      */
     public function sendRequest($method, $options = [], $assoc = true)

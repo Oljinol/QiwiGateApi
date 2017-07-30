@@ -25,7 +25,7 @@ require_once './QiwiGate.php'; //путь до файла
 * Инициализация:
 ```php
 $purseAPIKey   = 'API токен кошелька';
-$accountAPIKey = 'API токен кошелька';
+$accountAPIKey = 'API токен аккаунта';
 
 $qiwi = new QGA\QiwiGate($purseAPIKey, $accountAPIKey);
 ```
@@ -58,21 +58,28 @@ $assoc = false;
 $qiwi->error = true || false;
 
 // Ответ с сервера в виде ассициативного массива или объекта
-$qiwi->response
-     ->status    = success
-     ->phone     = 79000000000
-     ->password  = xxx
-     ->expire    = dd.mm.yyyy
-     ->pay       = 1
+$qiwi->response = [
+    'status'   => 'success',
+    'phone'    => '79000000000',
+    'password' => 'xxx',
+    'expire'   => 'dd.mm.yyyy',
+    'pay'      => '1'
+];
+// ИЛИ
+$qiwi->response->status    = 'success';
+$qiwi->response->phone     = '79000000000';
+$qiwi->response->password  = 'xxx';
+$qiwi->response->expire    = 'dd.mm.yyyy';
+$qiwi->response->pay       = '1';
 
 // Ссылка которая была сформирована и по которой был отправлен запрос 
-$qiwi->link = 'https://qiwigate.ru/api?key=API токен кошелька&method=account.info.wallet?phone_key=API токен кошелька';
+$qiwi->link = 'https://qiwigate.ru/api?key=API токен аккаунта&method=account.info.wallet?phone_key=API токен кошелька';
 ```
 
 ### ***Боевой пример***
 ```php
 $purseAPIKey   = 'API токен кошелька';
-$accountAPIKey = 'API токен кошелька';
+$accountAPIKey = 'API токен аккаунта';
 
 $qiwi = new QGA\QiwiGate($purseAPIKey, $accountAPIKey);
 

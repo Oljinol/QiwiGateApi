@@ -58,3 +58,28 @@ $qiwi->response
 // Ссылка которая была сформирована и по которой был отправлен запрос 
 $qiwi->link = 'https://qiwigate.ru/api?key=API токен кошелька&method=account.info.wallet?phone_key=API токен кошелька';
 ```
+
+### ***Боевой пример***
+```php
+$purseAPIKey   = 'API токен кошелька';
+$accountAPIKey = 'API токен кошелька';
+
+$qiwi = new QGA\QiwiGate($purseAPIKey, $accountAPIKey);
+
+$options = [                      
+    'start'    => '01.01.1970',
+    'finish'   => '02.01.1970',
+    'status'   => 'SUCCESS',
+    'currency' => 'qiwi_RUB',
+    'type'     => 'in'
+];
+$method  = 'qiwi.get.history';
+
+$qiwi->sendRequest($method, $options);
+
+if ($qiwi->error){
+    $db->writeToTheDatabase($qiwi->response);
+} else {
+    // Произошла ошибка
+}
+```

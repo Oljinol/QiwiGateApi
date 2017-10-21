@@ -19,9 +19,10 @@ class QiwiGate
     private $result;
 
     /**
-     * QiwiGate constructor.
-     * @param $purseAPIKey, API ключ кошелька
-     * @param $accountAPIKey, API ключ аккаунта
+     * QiwiGate constructor
+     * 
+     * @param $purseAPIKey API ключ кошелька
+     * @param $accountAPIKey API ключ аккаунта
      */
     public function __construct($purseAPIKey, $accountAPIKey)
     {
@@ -32,7 +33,7 @@ class QiwiGate
     /**
      * Установить API ключ кошелька
      *
-     * @param $value, API ключ кошелька
+     * @param $value API ключ кошелька
      */
     public function setPurseAPIKey($value)
     {
@@ -42,9 +43,9 @@ class QiwiGate
     /**
      * Отправить запрос
      *
-     * @param $method, имя метода
-     * @param array $options, параметры запроса
-     * @param bool $assoc, ассоциативный массив или объект
+     * @param $method имя метода
+     * @param array $options параметры запроса
+     * @param bool $assoc ассоциативный массив или объект
      * @return $this
      */
     public function sendRequest($method, $options = [], $assoc = true)
@@ -56,7 +57,7 @@ class QiwiGate
         return $this;
     }
 
-    private function setProperties($method, $options, $assoc)
+    protected function setProperties($method, $options, $assoc)
     {
         $this->method  = $method;
         $this->options = $options;
@@ -64,14 +65,27 @@ class QiwiGate
         $this->assoc   = $assoc;
     }
 
-    private function initializeQuery()
+    protected function initializeQuery()
     {
         $this->link     = $this->getLink();
-        $this->result   = file_get_contents($this->link);
+        $this->result   = $this->parseJsonResponse();
         $this->response = json_decode($this->result, $this->assoc);
+        
+        if (empty($this->response)) {
+            $this->error = true;
+        }
+    }
+    
+    protected function parseJsonResponse()
+    {
+        $response = file_get_contents($this->link);
+        
+        $parseResponse = str_replace('\\', ' ', $response);
+        
+        return $parseResponse;
     }
 
-    private function checkResult()
+    protected function checkResult()
     {
         $result = json_decode($this->result);
 
@@ -80,18 +94,18 @@ class QiwiGate
         }
     }
 
-    private function getLink()
+    protected function getLink()
     {
         $link = 'https://qiwigate.ru/api?key=' . $this->getKey() . '&method=' . $this->method;
 
         if (!empty($this->options)) {
-            $link = $link . '&' . http_build_query($this->options);
+            $link .= '&' . http_build_query($this->options);
         }
 
         return $link;
     }
 
-    private function getKey()
+    protected function getKey()
     {
         if ($this->type === 'qiwi') {
             return $this->qiwiKey;

@@ -4,19 +4,18 @@ namespace QGA;
 
 class QiwiGate
 {
-    private $qiwiKey;
-    private $accountKey;
+    protected $qiwiKey;
+    protected $accountKey;
 
     public $error = false;
     public $response;
-    public $history;
     public $link;
 
-    private $method;
-    private $options;
-    private $assoc;
-    private $type;
-    private $result;
+    protected $method;
+    protected $options;
+    protected $assoc;
+    protected $type;
+    protected $jsonResponse;
 
     /**
      * QiwiGate constructor
@@ -67,9 +66,9 @@ class QiwiGate
 
     protected function initializeQuery()
     {
-        $this->link     = $this->getLink();
-        $this->result   = $this->parseJsonResponse();
-        $this->response = json_decode($this->result, $this->assoc);
+        $this->link         = $this->getLink();
+        $this->jsonResponse = $this->parseJsonResponse();
+        $this->response     = json_decode($this->jsonResponse, $this->assoc);
         
         if (empty($this->response)) {
             $this->error = true;
@@ -87,7 +86,7 @@ class QiwiGate
 
     protected function checkResult()
     {
-        $result = json_decode($this->result);
+        $result = json_decode($this->jsonResponse);
 
         if ($result->status === 'error') {
             $this->error = true;
@@ -113,4 +112,10 @@ class QiwiGate
 
         return $this->accountKey;
     }
+
+    public function getJsonResponse()
+    {
+        return $this->jsonResponse;
+    }
+
 }
